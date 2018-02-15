@@ -9,3 +9,6 @@ and then replace sql in the .evn to:
 
 DB_CONNECTION=sqlite
 DB_DATABASE=<path to sql>/database/database.sqlite
+
+composer install
+php artisan migrate:install
