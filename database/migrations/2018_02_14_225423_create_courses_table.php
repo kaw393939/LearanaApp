@@ -18,7 +18,7 @@ class CreateCoursesTable extends Migration
             $table->integer('user_id');
             $table->string('title');
             $table->string('description');
-            $table->boolean('publish')->default(false);;
+            $table->boolean('publish')->default(false);
             $table->timestamps();
         });
     }

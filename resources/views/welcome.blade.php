@@ -1,95 +1,44 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Laravel</title>
+@section('content')
+    <h1>My Courses</h1>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+    <!-- will be used to show any messages -->
+    @if (Session::has('message'))
+        <div class="alert alert-info">{{ Session::get('message') }}</div>
+    @endif
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <td>Title</td>
+            <td>Description</td>
+            <td>Publish</td>
 
-            .full-height {
-                height: 100vh;
-            }
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($courses as $key => $value)
+            <tr>
+                <td>{{ $value->title }}</td>
+                <td>{{ $value->description }}</td>
+                <td>{{ $value->publish }}</td>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+                <!-- we will also add show, edit, and delete buttons -->
+                <td>
 
-            .position-ref {
-                position: relative;
-            }
+                    <!-- delete the nerd (uses the destroy method DESTROY /nerds/{id} -->
+                    <!-- we will add this later since its a little more complicated than the other two buttons -->
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+                    <!-- show the nerd (uses the show method found at GET /nerds/{id} -->
+                    <a class="btn btn-small btn-success" href="{{ URL::to('courses/' . $value->id) }}">Show this Nerd</a>
 
-            .content {
-                text-align: center;
-            }
+                    <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
+                    <a class="btn btn-small btn-info" href="{{ URL::to('courses/' . $value->id . '/edit') }}">Edit this Nerd</a>
 
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+@endsection

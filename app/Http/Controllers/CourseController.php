@@ -13,6 +13,12 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index','show']]);
+    }
+
     public function index()
     {
         //
@@ -52,7 +58,7 @@ class CourseController extends Controller
         $course->description = $request->description;
         $course->publish = $request->has('publish');
         $course->save();
-        return redirect()->route('courses.index');
+        return redirect()->route('home');
 
 
     }
@@ -65,8 +71,8 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        //
-        return view('courses.course')->with('course', $course);
+        $resources = $course->resources()->get();
+        return view('courses.course')->with(compact('course', 'resources'));
     }
 
     /**
