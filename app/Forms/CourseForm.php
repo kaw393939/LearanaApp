@@ -10,14 +10,14 @@ class CourseForm extends Form
     {
         $this
             ->add('title', 'text', [
-                'label' => 'Post title',
+                'label' => 'Course title',
                 'rules' => 'required|min:5',
                 'error_messages' => [
                     'title.required' => 'The title field is mandatory.'
                 ]
             ])
             ->add('description', 'textarea', [
-                'label' => 'Post body',
+                'label' => 'Course Description',
                 'rules' => 'required|min:5,max:5000'
             ])
             ->add('publish', 'checkbox', [

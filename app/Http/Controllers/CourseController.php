@@ -72,7 +72,8 @@ class CourseController extends Controller
     public function show(Course $course)
     {
         $resources = $course->resources()->get();
-        return view('courses.course')->with(compact('course', 'resources'));
+        $sections = $course->sections()->get();
+        return view('courses.full')->with(compact('course', 'resources', 'sections'));
     }
 
     /**

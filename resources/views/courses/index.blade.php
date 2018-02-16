@@ -9,37 +9,16 @@
 @endif
 <div class="container">
     <h1>All Courses</h1>
-<table class="table table-striped table-bordered">
-    <thead>
-    <tr>
-        <td>Title</td>
-        <td>Description</td>
-        <td>Publish</td>
-        <td>View</td>
 
-    </tr>
-    </thead>
-    <tbody>
     @foreach($courses as $key => $value)
-        <tr>
-            <td>{{ $value->title }}</td>
-            <td>{{ $value->description }}</td>
-            <td>{{ $value->publish }}</td>
 
-            <!-- we will also add show, edit, and delete buttons -->
-            <td>
+        <div class="card">
+            <div class="card-title">{{ $value->title }} - {{ $value->publish }}</div>
+            <div class="card-body">{{ $value->description }}</div>
+            <div class="card-footer"><a class="btn btn-small btn-success" href="{{ route('courses.show', ['course' => $value->id]) }}">View</a></div>
 
-                <!-- delete the nerd (uses the destroy method DESTROY /nerds/{id} -->
-                <!-- we will add this later since its a little more complicated than the other two buttons -->
-
-                <!-- show the nerd (uses the show method found at GET /nerds/{id} -->
-                <a class="btn btn-small btn-success" href="{{ URL::to('courses/' . $value->id) }}">View</a>
-
-                <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
-            </td>
-        </tr>
+        </div>
     @endforeach
-    </tbody>
-</table>
+
 </div>
 @endsection
