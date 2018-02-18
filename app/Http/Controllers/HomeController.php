@@ -26,8 +26,8 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $courses = $user->courses()->get();
+        $pageTitle = 'My Courses';
 
-
-        return view('courses.index')->with('courses', $courses);
+        return view('courses.index')->with(compact('courses','pageTitle'));
     }
 }

@@ -1,16 +1,69 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Showing {{ $course->title }}</h1>
+    <div class="row">
+    <div class="box ml-3 mr-3">
+        <div class="box-header with-border">
+            <h3 class="box-title">Title: {{ $course->title }}</h3>
+            <p class="lead">
+            <p>Description: {{$course->description}}</p>
+            <div class="box-footer">
+                <p><a href="{{ route('sections.create', ['course' => $course->id]) }}">Add Session</a></p>
+            </div>
+        </div>
+    </div>
+    </div>
 
-    <p>{{$course->description}}</p>
-    <p>{{$course->publish}}</p>
 
-    <a href="{{ route('sections.create', ['course' => $course->id]) }}">Add Section</a>
-    <h1>Sections</h1>
+    <div class="row">
+        <div class="box ml-3 mr-3">
+            <div class="box-header with-border">
+                <h3 class="box-title">Sessions</h3>
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Course ID</th>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>Open</th>
+                            <th>Close</th>
+                            <th>Status</th>
+                            <th>Publish</th>
+                            <th>Roster</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($sections as $key => $value)
+                            @include('sections.tr')
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="box-footer">
+                    <div>
+                        <ul class="pagination pagination-sm">
+                            <li><a href="#">«</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">»</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="box ml-3 mr-3">
+            <div class="box-header with-border">
+                <h3 class="box-title">Course Resources</h3>
 
-    @foreach($sections as $key => $value)
-        @include('sections.partial')
-    @endforeach
+                <div class="box-footer">
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection

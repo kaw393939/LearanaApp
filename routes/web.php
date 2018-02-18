@@ -20,6 +20,7 @@ Route::get('/courses/{course}', 'CourseController@show')->name('courses.show');
 Route::get('/courses/{course}/sections/new', 'SectionController@create')->name('sections.create');
 Route::post('/courses/{course}/sections', 'SectionController@store')->name('sections.store');
 Route::get('/courses/{course}/sections/{section}', 'SectionController@show')->name('sections.show');
+Route::get('/courses/{course}/sections/{section}/register', 'SectionController@register')->name('sections.register');
 
 
 Route::get('/courses', 'CourseController@index')->name('courses.index');

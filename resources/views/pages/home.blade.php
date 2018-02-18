@@ -17,12 +17,22 @@
     </thead>
     <tbody>
     @foreach($courses as $key => $value)
-        <div class="card">
-            <div class="card-title">{{ $value->title }}</div>
-            <div class="card-body">{{ $value->description }}</div>
-            <div class="card-footer">{{ $value->publish }}</div>
 
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <i class="fa fa-text-width"></i>
+
+                <h3 class="box-title"><div class="card-title">{{ $value->title }}</div>/h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                {{ $value->description }}
+
+
+            </div>
+            <!-- /.box-body -->
         </div>
+
     @endforeach
     </tbody>
 </table>

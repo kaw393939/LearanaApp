@@ -1,50 +1,70 @@
-<nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-    <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'Laravel') }}
+<div class="wrapper">
+
+    <!-- Main Header -->
+    <header class="main-header">
+
+        <!-- Logo -->
+        <a href="/" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini">L</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg">{{ config('app.name', 'Laravel') }}</span>
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav mr-auto">
-                @guest
-                    <li><a class="nav-link" href="{{ route('guest') }}">Home</a></li>
-                @else
-                    <li><a class="nav-link" href="{{ route('home') }}">My Courses</a></li>
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
 
-                @endguest
-            </ul>
+            @guest
+                <style>
 
-            <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Authentication Links -->
-                @guest
-                    <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
-                    <li><a class="nav-link" href="{{ route('register') }}">Register</a></li>
-                @else
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ Auth::user()->name }} <span class="caret"></span>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    .content-wrapper, .main-footer {
+                        margin-left: 0px;
+                    }  </style>
+            @else
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+        @endguest
 
-                            <a class="dropdown-item" href="{{ route('courses.create') }}">Add Course</a>
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                Logout
-                            </a>
+        <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- Messages: style can be found in dropdown.less-->
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    <!-- Notifications Menu -->
+
+                    @guest
+
+                        <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+                        <li><a class="nav-link" href="{{ route('register') }}">Register</a></li>
+                    @else
+                        <li>
+                            <form class="navbar-form .form-control" action="{{ route('logout') }}" method="POST">
                                 @csrf
+                                <button type="submit" class="btn "><i class="text-muted fa fa-sign-out "></i></button>
                             </form>
-                        </div>
-                    </li>
+                        </li>
+
+                        <!-- Control Sidebar Toggle Button -->
+                        <li>
+                            <a href="#" data-toggle="control-sidebar"><i class="fa fa-comments-o"></i><span
+                                        class="label label-warning">10</span></a>
+                        </li>
                 @endguest
-            </ul>
-        </div>
-    </div>
-</nav>
+                <!-- User Account Menu -->
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+@auth
+    @include('includes.leftSide')
+@endauth
+
+
+
+
+
+
+

@@ -24,8 +24,9 @@ class CourseController extends Controller
         //
         $courses = Course::all();
 
-        return view('courses.index')->with('courses', $courses);
+        $pageTitle = 'Courses';
 
+        return view('courses.index')->with(compact('courses','pageTitle'));
     }
 
     /**
@@ -39,8 +40,9 @@ class CourseController extends Controller
             'method' => 'POST',
             'url' => route('courses.store')
         ]);
+        $pageTitle = 'Create Course';
 
-        return view('courses.form', compact('form'));
+        return view('courses.form', compact('form','pageTitle'));
     }
 
     public function store(FormBuilder $formBuilder, Request $request)
@@ -73,7 +75,8 @@ class CourseController extends Controller
     {
         $resources = $course->resources()->get();
         $sections = $course->sections()->get();
-        return view('courses.full')->with(compact('course', 'resources', 'sections'));
+        $pageTitle = 'Course';
+        return view('courses.full')->with(compact('course', 'resources', 'sections','pageTitle'));
     }
 
     /**
