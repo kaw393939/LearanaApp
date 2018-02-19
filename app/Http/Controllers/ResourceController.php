@@ -44,16 +44,17 @@ class ResourceController extends Controller
     public function store($courseID, Request $request)
     {
 
-        $resoure = new Resource();
-        $resoure->user_id = Auth::id();
-        $resoure->course_id = $courseID;
-        $resoure->url = $request->url;
+        $resource = new Resource();
+        $resource->user_id = Auth::id();
+        $resource->course_id = $courseID;
+        $resource->title = $request->title;
+        $resource->url = $request->url;
 
-        $resoure->publish = $request->publish;
+        $resource->publish = $request->publish;
 
-        $resoure->save();
+        $resource->save();
 
-        return redirect()->route('courses.show',$courseID);
+        return redirect()->route('resource.show',['course'=>$courseID, 'resource'=>$resource->id]);
     }
 
     /**
@@ -78,11 +79,23 @@ class ResourceController extends Controller
      * @param  \App\Resource  $resource
      * @return \Illuminate\Http\Response
      */
-    public function edit(Resource $resource)
+    public function edit(FormBuilder $formBuilder, $course, Resource $resource)
     {
         //
-    }
+        $edit = $formBuilder->create(\App\Forms\Resource::class, [
+            'method' => 'PATCH',
+            'url' => route('resource.update', [$course, $resource->id]),
+            'model' => $resource,
+        ]);
+        //
+        $delete = $formBuilder->create(\App\Forms\DeleteForm::class, [
+            'method' => 'DELETE',
+            'url' => route('resource.destroy', [$course, $resource->id]),
+        ]);
+        $pageTitle = 'Edit Resource';
+        return view('resources.formEdit', compact('edit','delete', 'pageTitle'));
 
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -90,19 +103,38 @@ class ResourceController extends Controller
      * @param  \App\Resource  $resource
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Resource $resource)
+    public function update(FormBuilder $formBuilder, Request $request, $course, Resource $resource)
     {
         //
+        $form = $formBuilder->create(\App\Forms\Resource::class);
+
+        if (!$form->isValid()) {
+            return redirect()->back()->withErrors($form->getErrors())->withInput();
+        }
+
+        // Do saving and other things...
+        $resource->title = $request->title;
+        $resource->url = $request->url;
+        $resource->publish = $request->has('publish');
+        $resource->save();
+
+        return redirect()->route('resource.show',['course' => $course, 'resource' => $resource->id ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Resource  $resource
+     * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Resource $resource)
+    public function destroy(FormBuilder $formBuilder,$course, Request $request, Resource $resource)
     {
-        //
+        // delete
+
+        $resource->delete();
+
+        // redirect
+        $request->session()->flash('message', 'Successfully deleted the nerd!');
+        return redirect()->route('course.show',['course' => $course]);
     }
 }

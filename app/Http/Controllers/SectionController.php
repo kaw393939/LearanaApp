@@ -28,30 +28,18 @@ class SectionController extends Controller
     {
         $form = $formBuilder->create(\App\Forms\Section::class, [
             'method' => 'POST',
-            'url' => route('sections.store',['courseid' => $courseID])
+            'url' => route('section.store', ['courseid' => $courseID])
         ]);
         $pageTitle = 'Create Section';
-        return view('sections.form', compact('form','pageTitle'));
+        return view('sections.form', compact('form', 'pageTitle'));
     }
-    public function register($course, Section $section, FormBuilder $formBuilder)
-    {   $form = $formBuilder->create(\App\Forms\Registration::class, [
-        'method' => 'POST',
-        'url' => route('registration.store',['course' => $course,'section' => $section])
-    ]);
 
-        $course = $section->course()->get();
-        $course = $course[0];
 
-        $courseTitle = $course->title;
-        $courseDescription  =  $course->description;
-        $pageTitle = 'Register for Section';
-        return view('sections.registration', compact('form','pageTitle','course','section','courseTitle','courseDescription'));
-    }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store($courseID, Request $request)
@@ -69,13 +57,13 @@ class SectionController extends Controller
 
         $section->save();
 
-        return redirect()->route('courses.show',$courseID);
+        return redirect()->route('course.show', $courseID);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Section  $section
+     * @param  \App\Section $section
      * @return \Illuminate\Http\Response
      */
     public function show($course, Section $section, FormBuilder $formBuilder)
@@ -84,40 +72,70 @@ class SectionController extends Controller
 
         $pageTitle = 'Roster';
 
-        return view('sections.roster')->with(compact( 'registrations', 'pageTitle','section'));
+        return view('registrations.index')->with(compact('registrations', 'pageTitle', 'section'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Section  $section
+     * @param  \App\Section $section
      * @return \Illuminate\Http\Response
      */
-    public function edit(Section $section)
+
+    public function edit(FormBuilder $formBuilder, $course, Section $section)
     {
         //
+        $edit = $formBuilder->create(\App\Forms\Section::class, [
+            'method' => 'PATCH',
+            'url' => route('section.update', [$course, $section->id]),
+            'model' => $section,
+        ]);
+        //
+        $delete = $formBuilder->create(\App\Forms\DeleteForm::class, [
+            'method' => 'DELETE',
+            'url' => route('section.destroy', [$course, $section->id]),
+        ]);
+        $pageTitle = 'Edit Section';
+        return view('sections.formEdit', compact('edit','delete', 'pageTitle'));
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Section  $section
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Section $section)
+    public function update(FormBuilder $formBuilder, Request $request, $course, Section $section)
     {
         //
+        $form = $formBuilder->create(\App\Forms\Section::class);
+
+        if (!$form->isValid()) {
+            return redirect()->back()->withErrors($form->getErrors())->withInput();
+        }
+
+        // Do saving and other things...
+        $section->start = $request->start;
+        $section->end = $request->end;
+        $section->open = $request->open;
+        $section->close = $request->close;
+        $section->status = $request->status;
+        $section->publish = $request->publish;
+
+        $section->save();
+
+        return redirect()->route('section.show',['course' => $course, 'section' => $section->id ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Section  $section
+     * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Section $section)
+    public function destroy(FormBuilder $formBuilder,$course, Request $request, Section $section)
     {
-        //
+        // delete
+
+        $section->delete();
+
+        // redirect
+        $request->session()->flash('message', 'Successfully deleted the nerd!');
+        return redirect()->route('course.show',['course' => $course]);
     }
 }

@@ -38,7 +38,7 @@ class CourseController extends Controller
     {
         $form = $formBuilder->create(\App\Forms\CourseForm::class, [
             'method' => 'POST',
-            'url' => route('courses.store')
+            'url' => route('course.store')
         ]);
         $pageTitle = 'Create Course';
 
@@ -90,16 +90,16 @@ class CourseController extends Controller
         //
         $edit = $formBuilder->create(\App\Forms\CourseForm::class, [
             'method' => 'PATCH',
-            'url' => route('courses.update', $course->id),
+            'url' => route('course.update', $course->id),
             'model' => $course,
         ]);
         //
         $delete = $formBuilder->create(\App\Forms\DeleteForm::class, [
             'method' => 'DELETE',
-            'url' => route('courses.destroy', $course->id),
+            'url' => route('course.destroy', $course->id),
         ]);
-
-        return view('courses.formEdit', compact('edit','delete'));
+        $pageTitle = 'Edit Course';
+        return view('courses.formEdit', compact('edit','delete', 'pageTitle'));
 
     }
 
@@ -125,7 +125,7 @@ class CourseController extends Controller
         $course->publish = $request->has('publish');
         $course->save();
 
-        return redirect()->route('courses.index');
+        return redirect()->route('course.show',['course' => $course->id ]);
     }
 
     /**
@@ -142,6 +142,6 @@ class CourseController extends Controller
 
         // redirect
         $request->session()->flash('message', 'Successfully deleted the nerd!');
-        return redirect()->route('courses.index');
+        return redirect()->route('course.index');
     }
 }

@@ -18,6 +18,7 @@ class CreateResourcesTable extends Migration
             $table->integer('user_id');
             $table->integer('course_id');
             $table->boolean('publish')->default(false);
+            $table->string('title');
             $table->string('url')->default('none');
             $table->timestamps();
         });

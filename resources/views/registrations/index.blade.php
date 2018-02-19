@@ -18,7 +18,7 @@
 
         <div class="box ml-3 mr-3">
             <div class="box-header with-border">
-                <h3 class="box-title">Registrations -    <a href="{{route('sections.register',['course' => $section->course_id,'section' => $section->id])}}">Link To Registration</a>
+                <h3 class="box-title">Registrations -    <a href="{{route('registration.create',['course' => $section->course_id,'section' => $section->id])}}">Link To Registration</a>
                 </h3>
                 <div class="box-body">
                     <table class="table table-bordered">

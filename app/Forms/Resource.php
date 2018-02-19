@@ -9,6 +9,13 @@ class Resource extends Form
     public function buildForm()
     {
         $this
+            ->add('title', 'text', [
+                'label' => 'Resource title',
+                'rules' => 'required|min:5',
+                'error_messages' => [
+                    'title.required' => 'The title field is mandatory.'
+                ]
+            ])
             ->add('url', 'url')
             ->add('publish', 'checkbox', [
                 'label' => 'Publish',

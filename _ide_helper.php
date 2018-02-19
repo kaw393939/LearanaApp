@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.6.3 on 2018-02-15 20:19:03.
+ * Generated for Laravel 5.6.3 on 2018-02-19 02:59:27.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -13438,6 +13438,224 @@ namespace Collective\Html {
  
 }
 
+namespace Intervention\Image\Facades { 
+
+    class Image {
+        
+        /**
+         * Overrides configuration settings
+         *
+         * @param array $config
+         * @static 
+         */ 
+        public static function configure($config = array())
+        {
+            return \Intervention\Image\ImageManager::configure($config);
+        }
+        
+        /**
+         * Initiates an Image instance from different input types
+         *
+         * @param mixed $data
+         * @return \Intervention\Image\Image 
+         * @static 
+         */ 
+        public static function make($data)
+        {
+            return \Intervention\Image\ImageManager::make($data);
+        }
+        
+        /**
+         * Creates an empty image canvas
+         *
+         * @param integer $width
+         * @param integer $height
+         * @param mixed $background
+         * @return \Intervention\Image\Image 
+         * @static 
+         */ 
+        public static function canvas($width, $height, $background = null)
+        {
+            return \Intervention\Image\ImageManager::canvas($width, $height, $background);
+        }
+        
+        /**
+         * Create new cached image and run callback
+         * (requires additional package intervention/imagecache)
+         *
+         * @param \Closure $callback
+         * @param integer $lifetime
+         * @param boolean $returnObj
+         * @return \Image 
+         * @static 
+         */ 
+        public static function cache($callback, $lifetime = null, $returnObj = false)
+        {
+            return \Intervention\Image\ImageManager::cache($callback, $lifetime, $returnObj);
+        }
+         
+    }
+ 
+}
+
+namespace Laravolt\Avatar { 
+
+    class Facade {
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setGenerator($generator)
+        {
+            return \Laravolt\Avatar\Avatar::setGenerator($generator);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function create($name)
+        {
+            return \Laravolt\Avatar\Avatar::create($name);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setFont($font)
+        {
+            return \Laravolt\Avatar\Avatar::setFont($font);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function toBase64()
+        {
+            return \Laravolt\Avatar\Avatar::toBase64();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function save($path, $quality = 90)
+        {
+            return \Laravolt\Avatar\Avatar::save($path, $quality);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function toSvg()
+        {
+            return \Laravolt\Avatar\Avatar::toSvg();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setBackground($hex)
+        {
+            return \Laravolt\Avatar\Avatar::setBackground($hex);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setForeground($hex)
+        {
+            return \Laravolt\Avatar\Avatar::setForeground($hex);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setDimension($width, $height = null)
+        {
+            return \Laravolt\Avatar\Avatar::setDimension($width, $height);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setFontSize($size)
+        {
+            return \Laravolt\Avatar\Avatar::setFontSize($size);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setBorder($size, $color)
+        {
+            return \Laravolt\Avatar\Avatar::setBorder($size, $color);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setShape($shape)
+        {
+            return \Laravolt\Avatar\Avatar::setShape($shape);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getInitial()
+        {
+            return \Laravolt\Avatar\Avatar::getInitial();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getImageObject()
+        {
+            return \Laravolt\Avatar\Avatar::getImageObject();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function buildAvatar()
+        {
+            return \Laravolt\Avatar\Avatar::buildAvatar();
+        }
+         
+    }
+ 
+}
+
 
 namespace  { 
 
@@ -15596,6 +15814,10 @@ namespace  {
     class Form extends \Collective\Html\FormFacade {}
 
     class Html extends \Collective\Html\HtmlFacade {}
+
+    class Image extends \Intervention\Image\Facades\Image {}
+
+    class Avatar extends \Laravolt\Avatar\Facade {}
  
 }
 
