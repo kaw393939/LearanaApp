@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-Frame-Options" content="allow">
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
     <link rel="apple-touch-icon" href="{{ asset('css/icon.png') }}">
     <!-- Place favicon.ico in the root directory -->
@@ -32,6 +33,7 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link rel="stylesheet" href="{{ asset('css/main.css')}}">
 
 
     <link rel="stylesheet"

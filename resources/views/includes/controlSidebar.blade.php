@@ -43,7 +43,7 @@
                 <ul class="contacts-list">
                     <li>
                         <a href="#">
-                            <img class="contacts-list-img" src={{asset('images/user2-160x160.jpg')}}" alt="User Image">
+                            <img class="contacts-list-img" src="{{asset('images/user2-160x160.jpg')}}" alt="User Image">
 
                             <div class="contacts-list-info">
                             <span class="contacts-list-name">

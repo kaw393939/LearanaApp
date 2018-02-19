@@ -35,6 +35,9 @@ Route::get('/courses/{course}/sections/{section}/registration/{registration}', '
 
 Route::post('/courses/{course}/sections/{section}/registration', 'RegistrationController@store')->name('registration.store');
 
+Route::get('/courses/{course}/resource/new', 'ResourceController@create')->name('resource.create');
+Route::get('/courses/{course}/resource/{resource}', 'ResourceController@show')->name('resource.show');
+
 Route::post('/courses/{course}/resource', 'ResourceController@store')->name('resource.store');
 
 
