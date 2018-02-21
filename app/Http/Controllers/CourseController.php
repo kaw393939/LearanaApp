@@ -22,11 +22,13 @@ class CourseController extends Controller
     public function index()
     {
         //
-        $courses = Course::all();
+        $records = Course::all()->toArray();
 
         $pageTitle = 'Courses';
 
-        return view('courses.index')->with(compact('courses','pageTitle'));
+        $records = data2Table($records);
+
+        return view('courses.index')->with(compact('records','pageTitle'));
     }
 
     /**
@@ -75,6 +77,7 @@ class CourseController extends Controller
     {
         $resources = $course->resources()->get();
         $sections = $course->sections()->get();
+
         $pageTitle = 'Course';
         return view('courses.full')->with(compact('course', 'resources', 'sections','pageTitle'));
     }

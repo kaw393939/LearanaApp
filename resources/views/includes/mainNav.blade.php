@@ -38,7 +38,11 @@
 
                         <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                         <li><a class="nav-link" href="{{ route('register') }}">Register</a></li>
+                        <li><a class="nav-link" href="{{ route('user.index') }}">Users</a></li>
+
                     @else
+                        <li><a class="nav-link" href="{{ route('user.index') }}">Users</a></li>
+
                         <li>
                             <form class="navbar-form .form-control" action="{{ route('logout') }}" method="POST">
                                 @csrf

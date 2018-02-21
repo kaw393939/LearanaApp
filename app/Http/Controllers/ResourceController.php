@@ -15,7 +15,13 @@ class ResourceController extends Controller
      */
     public function index()
     {
-        //
+        $records = Resource::all()->toArray();
+
+        $pageTitle = 'Resources';
+        $records = data2Table($records);
+
+
+        return view('resources.index')->with(compact('records','pageTitle'));
     }
 
     /**

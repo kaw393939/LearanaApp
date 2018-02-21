@@ -16,18 +16,43 @@
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">Actions</li>
             <!-- Optionally, you can add icons to the links -->
-            <li><a href="{{ route('course.create') }}"><i class="fa fa-link"></i> <span>Add Course</span></a></li>
+            <li><a href="{{ route('course.create') }}"><i class="fa fa-book"></i> <span>Courses</span></a></li>
+            <li><a href="{{ route('course.create') }}"><i class="fa fa-calendar"></i> <span>Sessions</span></a></li>
+            <li><a href="{{ route('course.create') }}"><i class="fa fa-compass"></i> <span>Content</span></a></li>
+            <li><a href="{{ route('course.create') }}"><i class="fa fa-dashboard"></i> <span>Insights</span></a></li>
+
+
+
             <li class="treeview">
-                <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+                <a href="#"><i class="fa fa-gears"></i> <span>Manage</span>
                     <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#">Link in level 2</a></li>
-                    <li><a href="#">Link in level 2</a></li>
+                    <li><a href="{{ route('user.index') }}">People</a></li>
+                    <li><a href="{{ route('course.index') }}">Courses</a></li>
+                    <li><a href="{{ route('resource.index') }}">Resources</a></li>
+                    <li><a href="{{ route('section.index') }}">Sessions</a></li>
+                    <li><a href="#">Accounting</a></li>
+                    <li><a href="#">Marketing</a></li>
+                </ul>
+            </li>
+
+
+
+            <li class="treeview">
+                <a href="#"><i class="fa fa-gear"></i> <span>Settings</span>
+                    <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="#">My Profile</a></li>
+                    <li><a href="#">Integrations</a></li>
+                    <li><a href="#">Payment</a></li>
+
                 </ul>
             </li>
         </ul>

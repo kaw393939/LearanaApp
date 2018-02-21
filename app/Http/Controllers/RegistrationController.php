@@ -19,6 +19,11 @@ class RegistrationController extends Controller
     public function index()
     {
         //
+        $records = Registration::all();
+
+        $pageTitle = 'Registration';
+
+        return view('registrations.index')->with(compact('records','pageTitle'));
     }
 
     /**

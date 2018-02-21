@@ -15,8 +15,12 @@ class CreateResourcesTable extends Migration
     {
         Schema::create('resources', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('course_id');
+            $table->integer('user_id')->unsigned();
+            //rest of fields then...
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('course_id')->unsigned();
+            //rest of fields then...
+            $table->foreign('course_id')->references('id')->on('courses');
             $table->boolean('publish')->default(false);
             $table->string('title');
             $table->string('url')->default('none');

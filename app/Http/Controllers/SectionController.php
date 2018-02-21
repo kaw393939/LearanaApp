@@ -16,7 +16,12 @@ class SectionController extends Controller
      */
     public function index()
     {
-        //
+        $records = Section::all()->toArray();
+
+        $pageTitle = 'Sessions';
+        $records = data2Table($records);
+
+        return view('sections.index')->with(compact('records','pageTitle'));
     }
 
     /**

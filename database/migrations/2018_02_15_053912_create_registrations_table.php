@@ -15,8 +15,12 @@ class CreateRegistrationsTable extends Migration
     {
         Schema::create('registrations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('section_id');
+            $table->integer('user_id')->unsigned();
+            //rest of fields then...
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('section_id')->unsigned();
+            //rest of fields then...
+            $table->foreign('section_id')->references('id')->on('sections');
             $table->timestamps();
         });
     }

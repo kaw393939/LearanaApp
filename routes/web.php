@@ -14,11 +14,20 @@
 Auth::routes();
 Route::get('/', 'CourseController@index')->name('guest');
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/course/index', 'CourseController@index')->name('course.index');
+Route::get('/resource/index', 'ResourceController@index')->name('resource.index');
+Route::get('/user/index', 'UserController@index')->name('user.index');
+Route::get('/section/index', 'SectionController@index')->name('section.index');
+
+
+
 //Resource Controllers to create new
 Route::get('/course/new', 'CourseController@create')->name('course.create');
 Route::get('/course/{course}/resource/new', 'ResourceController@create')->name('resource.create');
 Route::get('/course/{course}/section/new', 'SectionController@create')->name('section.create');
 Route::get('/course/{course}/section/{section}/register/new/', 'RegistrationController@create')->name('registration.create');
+
 //routes to store new records
 Route::post('/course', 'CourseController@store')->name('course.store');
 Route::post('/course/{course}/resource', 'ResourceController@store')->name('resource.store');
@@ -45,11 +54,11 @@ Route::delete('/courses/{course}/resource/{resource}', 'ResourceController@destr
 Route::delete('/courses/{course}/sections/{section}', 'SectionController@destroy')->name('section.destroy');
 Route::delete('/courses/{course}/sections/{section}/registration/{registration}', 'RegistrationController@destroy')->name('registration.destroy');
 //routes to show an index list of records
-Route::get('/course/index', 'CourseController@index')->name('course.index');
-Route::get('/courses/{course}/resource/index', 'ResourceController@index')->name('resource.index');
-Route::get('/course/{course}/section/index', 'SectionController@index')->name('section.index');
+//Route::get('/courses/{course}/resource/index', 'ResourceController@index')->name('resource.index');
 Route::get('/course/{course}/section/{section}/registration/index', 'RegistrationController@index')->name('registration.index');
 
+
+Route::get('/user/{user_id}', 'UserController@show')->name('user.show');
 
 
 

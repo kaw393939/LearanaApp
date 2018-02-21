@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\Course;
+use App\Section;
+
 use Illuminate\Http\Request;
+use Kris\LaravelFormBuilder\FormBuilder;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -13,7 +19,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $records = User::all()->toArray();
+
+        $pageTitle = 'Users';
+        $records = data2Table($records);
+
+
+        return view('user.index')->with(compact('records','pageTitle'));
+
+
     }
 
     /**
@@ -32,9 +46,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
-        //
+
     }
 
     /**
@@ -43,9 +57,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($user)
     {
-        //
+        //$courses = $user->courses();
+
+        $user = User::find($user);
+
+
+        $courses = $user->courses()->get();
+
+        $sections = $user->sections()->get();
+        $pageTitle = 'User Profile';
+        return view('user.full')->with(compact('user', 'courses', 'sections','pageTitle'));
     }
 
     /**
